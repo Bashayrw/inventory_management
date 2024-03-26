@@ -12,7 +12,7 @@ namespace sda_onsite_2_inventory_management.src
         public Item(string name, int quantity, DateTime createdDate = default)
         {
             _name = name;
-            _quantity = quantity;
+            _quantity = (quantity > 0) ? quantity : throw new ArgumentException("Quantity should be bigger than 0");
             _createdAt = createdDate == default ? DateTime.Now : createdDate;
         }
         // declare the get methods
@@ -27,6 +27,7 @@ namespace sda_onsite_2_inventory_management.src
         public DateTime? GetCreatedAt()
         {
             return _createdAt;
+
         }
     }
 }

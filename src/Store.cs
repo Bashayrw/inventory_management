@@ -24,8 +24,15 @@ namespace sda_onsite_2_inventory_management.src
         }
         public bool AddItems(Item newItem)
         {
-            _items.Add(newItem);
-            return true;
+            Item? foundItem = _items.Find(item => item.GetName() == newItem.GetName());
+
+            if (foundItem is null)
+            {
+                _items.Add(newItem);
+                return true;
+            }
+            return false;
+
         }
         public bool RemoveItems(Item newItem)
         {
@@ -35,7 +42,12 @@ namespace sda_onsite_2_inventory_management.src
 
         public int GetCurrentVolume()
         {
-            return GetItems().Count;
+            int totalAmount = 0;
+            foreach (Item item in _items)
+            {
+                totalAmount += item.GetQuantity();
+            }
+            return totalAmount;
         }
 
         public Item? FindItemByName(string name)
@@ -49,5 +61,9 @@ namespace sda_onsite_2_inventory_management.src
             throw new ArgumentException("cannot find the item!!!");
         }
 
+        public List<Item> SortByNameAsc()
+        {
+            return _items.OrderBy(item => item.GetName()).ToList();
+        }
     }
 }
