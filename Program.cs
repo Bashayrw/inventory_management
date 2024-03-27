@@ -5,10 +5,10 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        Store store = new("Supermarket");
+        Store store = new("Supermarket", 200);
 
         Item chocolate = new("Galaxy Crispy", 2);
-        Item drinks = new("Milk", 5);
+        Item drinks = new("Milk", 30);
         Item care = new("Shampoo", 20);
 
 
@@ -19,6 +19,8 @@ internal class Program
         store.AddItems(drinks);
         store.AddItems(care);
         Console.WriteLine($"the current volume is {store.GetCurrentVolume()}");
+        Console.WriteLine($"the max capacity is {store.GetMaxCapacity()}");
+
 
         //Console.WriteLine("Counting" + items.Count);
 

@@ -11,19 +11,34 @@ namespace sda_onsite_2_inventory_management.src
     {
         private List<Item> _items;
         private readonly string _name;
+        private readonly int _maxCapacity;
 
         // var store1 = new Store("manuel")
-        public Store(string name)
+        public Store(string name, int maxCapacity)
         {
             _name = name;
             _items = []; // automatically give the empty array of items
+            _maxCapacity = maxCapacity;
         }
         public List<Item> GetItems()
         {
             return _items;
         }
+        public int GetMaxCapacity()
+        {
+            return _maxCapacity;
+        }
+
         public bool AddItems(Item newItem)
         {
+            int availableSpace = GetMaxCapacity() - GetCurrentVolume();
+            Console.WriteLine($"available space{availableSpace}");
+
+            if (availableSpace < newItem.GetQuantity())
+            {
+                throw new Exception("sorry, there is no more space");
+            }
+
             Item? foundItem = _items.Find(item => item.GetName() == newItem.GetName());
 
             if (foundItem is null)
