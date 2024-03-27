@@ -7,6 +7,11 @@ using Microsoft.VisualBasic;
 
 namespace sda_onsite_2_inventory_management.src
 {
+    public enum SortOrder
+    {
+        ASC,
+        DESC
+    }
     public class Store
     {
         private List<Item> _items;
@@ -80,5 +85,23 @@ namespace sda_onsite_2_inventory_management.src
         {
             return _items.OrderBy(item => item.GetName()).ToList();
         }
+
+        public List<Item> SortByDate(SortOrder sort)
+        {
+            if (sort == SortOrder.ASC)
+            {
+                var asc = _items.OrderBy(item => item.GetCreatedAt()).ToList();
+                return asc;
+            }
+            else
+            {
+                var desc = _items.OrderByDescending(item => item.GetCreatedAt()).ToList();
+                return desc;
+            }
+        }
+
+        
+
+
     }
 }

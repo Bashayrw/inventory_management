@@ -8,8 +8,9 @@ internal class Program
         Store store = new("Supermarket", 200);
 
         Item chocolate = new("Galaxy Crispy", 2);
-        Item drinks = new("Milk", 30);
-        Item care = new("Shampoo", 20);
+         Item care = new("Shampoo", 20, new DateTime(2022,09,29));
+        Item drinks = new("Milk", 30, new DateTime(2024,02,01));
+       
 
 
         List<Item> items = store.GetItems();
@@ -24,7 +25,7 @@ internal class Program
 
         //Console.WriteLine("Counting" + items.Count);
 
-        //store.RemoveItems(chocolate);
+        store.RemoveItems(chocolate);
 
         foreach (Item item in items)
         {
@@ -39,5 +40,15 @@ internal class Program
         {
             Console.WriteLine(item.GetName());
         }
+
+        List<Item> SortByDate = store.SortByDate(SortOrder.DESC);
+    
+        foreach (Item item in SortByDate)
+        {
+            Console.WriteLine($"name of the item is{item.GetName()}, it was created at {item.GetCreatedAt()}");
+
+        }
+
+
     }
 }
