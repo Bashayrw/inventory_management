@@ -47,7 +47,7 @@ namespace sda_onsite_2_inventory_management.src
             Item? foundItem = _items.Find(item => item.GetName() == newItem.GetName());
 
             if (foundItem is null)
-            {
+            { 
                 _items.Add(newItem);
                 return true;
             }
@@ -62,12 +62,16 @@ namespace sda_onsite_2_inventory_management.src
 
         public int GetCurrentVolume()
         {
-            int totalAmount = 0;
-            foreach (Item item in _items)
-            {
-                totalAmount += item.GetQuantity();
-            }
-            return totalAmount;
+            int totalQuantity = _items.Sum(item => item.GetQuantity());
+            return totalQuantity;
+
+
+            // int totalAmount = 0;
+            // foreach (Item item in _items)
+            // {
+            //     totalAmount += item.GetQuantity();
+            // }
+            // return totalAmount;
         }
 
         public Item? FindItemByName(string name)
