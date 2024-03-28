@@ -100,8 +100,18 @@ namespace sda_onsite_2_inventory_management.src
             }
         }
 
-        
+        public void GroupByDate()
+        {
+            var groupByDate = _items.GroupBy(item => item.GetCreatedAt() >= DateTime.Now.AddMonths(-3) ? "New Arrival" : "old");
+            foreach (var group in groupByDate)
+            {
+                Console.WriteLine($"{group.Key} Items:");
 
-
+                foreach (var item in group)
+                {
+                    Console.WriteLine($" - {item.GetName()}, Created: {item.GetCreatedAt()}");
+                }
+            }
+        }
     }
 }
